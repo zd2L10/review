@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>書籍レビューサイト</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-lg-4 offset-lg-4">
+				<form action="" method="post" th:object="${user}">
+					<h1 class="text-center mb-3">書籍レビューログイン</h1>
+
+					<p class="error" th:errors="*{loginId}"></p>
+					<p class="error" th:errors="*{loginPass}"></p>
+					<p class="error" th:errors="*{login}"></p>
+
+					<div class="form-floating">
+						<input type="text" th:field="*{loginId}" class="form-control"
+							id="floatingInput" placeholder="ログインID"> <label
+							for="floatingInput">ログインID</label>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="password" th:field="*{loginPass}"
+							class="form-control" id="floatingPassword" placeholder="パスワード">
+						<label for="floatingPassword">パスワード</label>
+					</div>
+					<input type="submit" class="btn btn-lg btn-primary w-100 mb-3"
+						value="ログイン"> <a th:href="@{/add}"
+						class="btn btn-lg btn-secondary w-100">新規登録</a> <a
+						th:href="@{/admin}" class="text-center mb-3">管理者としてログイン</a>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
