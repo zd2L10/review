@@ -27,7 +27,7 @@
 		(#{title}, #{img}, #{name}, #{review})
 	</insert>
 	
-	<update id="update" parameterType="Result">
+	<update id="update" parameterType="Review">
 		UPDATE result 
 		SET title = #{title}, img = #{img}, 
 		name = #{name}, review = #{review}
@@ -39,7 +39,7 @@
 		WHERE review_id = #{reviewId}
 	</delete>
 	
-	<select id="findById" resultMap="joinedResult">
+	<select id="findById" resultMap="joinedReview">
 		SELECT 
 		result.result_id, result.user_id, user.login_id, 
 		result.derection, result.rank, result.time, 
