@@ -43,10 +43,14 @@
 	<select id="countReview" resultType="long">
 	SELECT COUNT(*)
 	FROM review
+	JOIN user 
+	ON review.name = user.name
 	</select>
 	
 	<select id="selectLimited" resultType="Review">
 	SELECT * FROM review
+	JOIN user 
+	ON review.name = user.name
 	LIMIT #{offset}, #{limit}
 	</select>
 </mapper>
