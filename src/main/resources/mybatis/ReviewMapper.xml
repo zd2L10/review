@@ -39,20 +39,6 @@
 		WHERE review_id = #{reviewId}
 	</delete>
 	
-	<select id="findById" resultMap="joinedReview">
-		SELECT 
-		result.result_id, result.user_id, user.login_id, 
-		result.derection, result.rank, result.time, 
-		result.east_score, result.south_score, 
-		result.west_score, result.north_score, 
-		result.east_player, result.south_player, 
-		result.west_player, result.north_player 
-		FROM result 
-		JOIN user 
-		ON result.user_id = user.id 
-		WHERE result_id = #{resultId}
-	</select>
-	
 	<!-- ページ分割 -->
 	<select id="countReview" resultType="long">
 	SELECT COUNT(*)
