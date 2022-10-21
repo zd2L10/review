@@ -23,7 +23,7 @@
 						<tr>
 							<th:block class="hidden"></th:block>
 							<td rowspan="3"><img
-								src="('https://iss.ndl.go.jp/thumbnail/' + '[[${review.img}]]')" /></td>
+								th:src="@{https://iss.ndl.go.jp/thumbnail/{area}(area=${review.img})}" /></td>
 							<td th:text="${review.title}"></td>
 							<td th:text="${review.name}"></td>
 							<td rowspan="3"><th:block class="btn"
