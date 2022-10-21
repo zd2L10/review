@@ -26,7 +26,7 @@ public class LoginController {
 	@GetMapping("/home")
 	public String login(Model model) {
 		model.addAttribute("user", new User());
-		return "/home";
+		return "home";
 	}
 
 	@PostMapping("/home")
@@ -39,7 +39,7 @@ public class LoginController {
 		}
 		// 入力不備確認のバリデーション
 		if (errors.hasErrors()) {
-			return "/home";
+			return "home";
 		}
 
 		session.setAttribute("user", userservice.getUserById(user.getLoginId()));
