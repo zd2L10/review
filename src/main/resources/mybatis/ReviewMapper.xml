@@ -13,11 +13,11 @@
 		ON review.name = user.name
 	</select>
 	
-	<select id="selectByName" parameterType="String" resultMap="joinedReview">
+	<select id="selectById" resultMap="joinedReview">
 		SELECT * FROM review
 		JOIN user
 		ON review.name = user.name
-		WHERE review.name = #{name}
+		WHERE review.id = #{reviewId}
 	</select>
 	
 	<insert id="insert" parameterType="Review">

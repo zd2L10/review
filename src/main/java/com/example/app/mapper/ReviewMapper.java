@@ -12,7 +12,7 @@ public interface ReviewMapper {
 
 	List<Review> selectAll() throws Exception;
 	
-	List<Review> selectByName(String reviewer) throws Exception;
+	Review selectById(Integer id) throws Exception;
 	
 	void insert(Review review) throws Exception;
 	

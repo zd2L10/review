@@ -8,8 +8,8 @@ public interface ReviewService {
 	// 全件取得リスト
 	List<Review> getReviewList() throws Exception;
 	
-	// 管理者用ユーザー投稿リスト
-	List<Review> getReviewByName(String name) throws Exception;
+	// idを元にデータを1件取得
+	Review getReviewById(Integer id) throws Exception;
 	
 	// データ追加・更新・削除
 	void addReview(Review review) throws Exception;

@@ -22,8 +22,8 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public List<Review> getReviewByName(String name) throws Exception {
-		return RMapper.selectByName(name);
+	public Review getReviewById(Integer id) throws Exception {
+		return RMapper.selectById(id);
 	}
 
 	@Override
