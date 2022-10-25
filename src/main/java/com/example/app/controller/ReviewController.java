@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Review;
 import com.example.app.domain.User;
@@ -50,7 +52,7 @@ public class ReviewController {
 	}
 
 	@PostMapping("/add")
-	public String addPost(HttpSession session, @Valid Review review, Errors errors, Model model) throws Exception {
+	public String addPost(HttpSession session, @Valid Review review, Errors errors, RedirectAttributes rd, Model model) throws Exception {
 		User user = (User) session.getAttribute("user");
 		// 入力不備
 		if (errors.hasErrors()) {
@@ -63,6 +65,34 @@ public class ReviewController {
 		review.setName(user.getName());
 		Rservice.addReview(review);
 		model.addAttribute("user", user);
-		return "result/list";
+		rd.addFlashAttribute("statusMessage", "レビューを投稿しました。");
+		return "redirect:/review";
+	}
+	
+	@GetMapping("/fix/{id}")
+	public String fixGet(@PathVariable Integer id, Model model)throws Exception{
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("user", user);
+		model.addAttribute("title", "レビュー編集");
+		model.addAttribute("review", Rservice.getReviewById(id));
+		return "review/save"; 
+	}
+	
+	@PostMapping("/fix/{id}")
+	public String addfix(HttpSession session, @Valid Review review, Errors errors, RedirectAttributes rd, Model model) throws Exception {
+		User user = (User) session.getAttribute("user");
+		// 入力不備
+		if (errors.hasErrors()) {
+			
+			model.addAttribute("user", user);
+			model.addAttribute("title", "レビュー編集");
+			return "review/save";
+		}
+		
+		review.setName(user.getName());
+		Rservice.editReview(review);
+		model.addAttribute("user", user);
+		rd.addFlashAttribute("statusMessage", "レビューを修正しました。");
+		return "redirect:/review";
 	}
 }
