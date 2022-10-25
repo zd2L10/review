@@ -9,6 +9,12 @@
 			<a class="btn btn-success" th:href="@{/review/add}">レビューを投稿する</a>
 		</div>
 	</div>
+
+	<!-- 操作に応じたメッセージを表示:start -->
+	<div th:if="${statusMessage}" class="alert alert-success mt-4" 
+	th:text="${statusMessage}"></div>
+	<!-- 操作に応じたメッセージを表示:end -->
+
 	<div class="row mt-5">
 		<div class="col-12">
 			<div id="table-view" class="toggle-display col-12 mt-3">
@@ -26,8 +32,15 @@
 								th:src="@{https://iss.ndl.go.jp/thumbnail/{area}(area=${review.img})}" /></td>
 							<td th:text="${review.title}"></td>
 							<td th:text="${review.name}"></td>
-							<td rowspan="3"><th:block class="btn"
-									th:field="${review.good}"></th:block></td>
+							<td rowspan="3"><th:block th:switch="${review.name}">
+									<th:block th:case="${user.name}">
+										<a th:href="@{/review/fix/{id}(id=${review.reviewId})}"
+											class="btn">修正</a>
+									</th:block>
+									<th:block th:case="*">
+										<a href=""></a>
+									</th:block>
+								</th:block></td>
 						</tr>
 						<tr>
 							<td colspan="2">レビュー</td>
