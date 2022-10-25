@@ -17,7 +17,7 @@
 		SELECT * FROM review
 		JOIN user
 		ON review.name = user.name
-		WHERE review.id = #{reviewId}
+		WHERE review_id = #{reviewId}
 	</select>
 	
 	<insert id="insert" parameterType="Review">
@@ -28,7 +28,7 @@
 	</insert>
 	
 	<update id="update" parameterType="Review">
-		UPDATE result 
+		UPDATE review 
 		SET title = #{title}, img = #{img}, 
 		name = #{name}, review = #{review}
 		WHERE review_id = #{reviewId}
