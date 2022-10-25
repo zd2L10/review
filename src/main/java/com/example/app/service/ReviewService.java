@@ -18,6 +18,8 @@ public interface ReviewService {
 	 
 	void deleteReview(Integer id) throws Exception;
 	
+	void goodReview(Integer id) throws Exception;
+	
 	// 合計件数
 	int getTotalPages(int numPerPage)throws Exception;
 		

@@ -20,6 +20,8 @@ public interface ReviewMapper {
 	
 	void delete(Integer id) throws Exception;
 	
+	void good(Integer id) throws Exception;
+	
 	Long countReview() throws Exception;
 	
 	List<Review> selectLimited(@Param("offset") int offset, @Param("limit") int limit) throws Exception;

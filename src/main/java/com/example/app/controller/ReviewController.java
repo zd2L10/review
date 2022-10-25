@@ -95,4 +95,11 @@ public class ReviewController {
 		rd.addFlashAttribute("statusMessage", "レビューを修正しました。");
 		return "redirect:/review";
 	}
+	
+	@GetMapping("/good/{id}")
+	public String good(@PathVariable Integer id,RedirectAttributes rd) throws Exception{
+		Rservice.goodReview(id);
+		rd.addFlashAttribute("statusMessage", "レビューにいいねをしました。");
+		return "redirect:/review";
+	}
 }

@@ -42,6 +42,11 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
+	public void goodReview(Integer id) throws Exception {
+		RMapper.good(id);
+	}
+	
+	@Override
 	public int getTotalPages(int numPerPage) throws Exception {
 		double totalNum = (double) RMapper.countReview();
 		return (int) Math.ceil(totalNum / numPerPage);
@@ -52,5 +57,6 @@ public class ReviewServiceImpl implements ReviewService{
 		int offset = numPerPage * (page - 1);
 		return RMapper.selectLimited(offset, numPerPage);
 	}
+
 
 }
