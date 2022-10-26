@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.User;
 import com.example.app.service.UserService;
@@ -56,6 +57,7 @@ public class LoginController {
 	public String addPost(
 			@Valid User user,
 			Errors errors,
+			RedirectAttributes rd,
 			Model model) throws Exception{
 		User tempUser = null;
 		tempUser = userservice.getUserById(user.getLoginId());
@@ -71,6 +73,15 @@ public class LoginController {
 		user.setLoginPass(BCrypt.hashpw(user.getLoginPass(), BCrypt.gensalt()));
 		model.addAttribute("user", user);
 		userservice.addUser(user);
+		rd.addFlashAttribute("statusMessage", "会員登録完了しました、ログイン画面からログインしてください。");
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session, RedirectAttributes rd) {
+		// セッションを破棄し、トップページへ遷移
+		session.invalidate();
+		rd.addFlashAttribute("statusMessage", "ログアウトしました。");
 		return "redirect:/home";
 	}
 }

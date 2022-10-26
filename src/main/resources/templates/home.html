@@ -12,10 +12,17 @@
 			<div class="col-lg-4 offset-lg-4">
 				<form action="" method="post" th:object="${user}">
 					<h1 class="text-center mb-3">書籍レビューログイン</h1>
-
+					
+					<!-- エラーにメッセージを表示:start -->
 					<p class="error" th:errors="*{loginId}"></p>
 					<p class="error" th:errors="*{loginPass}"></p>
 					<p class="error" th:errors="*{login}"></p>
+					<!-- エラーに応じたメッセージを表示:end -->
+
+					<!-- 操作に応じたメッセージを表示:start -->
+					<div th:if="${statusMessage}" class="alert alert-success mt-4"
+						th:text="${statusMessage}"></div>
+					<!-- 操作に応じたメッセージを表示:end -->
 
 					<div class="form-floating">
 						<input type="text" th:field="*{loginId}" class="form-control"
