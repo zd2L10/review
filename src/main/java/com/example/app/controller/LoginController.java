@@ -33,7 +33,7 @@ public class LoginController {
 	@PostMapping({"/", "/home"})
 	public String login(@Valid User user, Errors errors, HttpSession session) throws Exception {
 
-		//
+		// IDとパスワードの正誤確認
 		if ((!user.getLoginId().isBlank() && !user.getLoginPass().isBlank())
 				&& (!userservice.isCorrectIdAndPass(user.getLoginId(), user.getLoginPass()))) {
 			errors.rejectValue("login", "incorrect_id_password");
