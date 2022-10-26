@@ -79,7 +79,7 @@ public class AdminController {
 		model.addAttribute("user", user);
 		model.addAttribute("title", "レビュー編集");
 		model.addAttribute("review", Rservice.getReviewById(id));
-		return "/admin/save"; 
+		return "/admin/adsave"; 
 	}
 	
 	@PostMapping("/fix/{id}")
@@ -90,13 +90,12 @@ public class AdminController {
 			
 			model.addAttribute("user", user);
 			model.addAttribute("title", "レビュー編集");
-			return "/admin/save";
+			return "/admin/adsave";
 		}
 		
-		review.setName(user.getName());
 		Rservice.editReview(review);
 		model.addAttribute("user", user);
 		rd.addFlashAttribute("statusMessage", "レビューを修正しました。");
-		return "redirect:/admin/adlist";
+		return "redirect:/admin/list";
 	}
 }

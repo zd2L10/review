@@ -27,10 +27,10 @@
 							<td th:text="${review.title}"></td>
 							<td th:text="${review.name}"></td>
 							<td rowspan="3"><a
-								th:href="@{/review/fix/{id}(id=${review.reviewId})}" class="btn">修正</a>
+								th:href="@{/admin/fix/{id}(id=${review.reviewId})}" class="btn">修正</a>
 								<a data-bs-toggle="modal" data-bs-target="#deleteModal"
 								data-role="deleteReview" th:data-name="|${review.name}さんの${review.title}|"
-								th:href="@{/review/delete/{id}(id=${review.reviewId})}">削除</a></td>
+								th:href="@{/admin/delete/{id}(id=${review.reviewId})}">削除</a></td>
 						</tr>
 						<tr>
 							<td colspan="2">レビュー</td>
