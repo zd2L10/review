@@ -22,4 +22,6 @@ public class User {
 	private String confpass;
 	
 	private String login;
+	
+	private String admin;
 }
