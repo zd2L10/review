@@ -24,13 +24,13 @@ public class LoginController {
 	@Autowired
 	HttpSession session;
 
-	@GetMapping("/home")
+	@GetMapping({"/", "/home"})
 	public String login(Model model) {
 		model.addAttribute("user", new User());
 		return "home";
 	}
 
-	@PostMapping("/home")
+	@PostMapping({"/", "/home"})
 	public String login(@Valid User user, Errors errors, HttpSession session) throws Exception {
 
 		//
