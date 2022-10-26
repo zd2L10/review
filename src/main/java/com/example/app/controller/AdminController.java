@@ -98,4 +98,11 @@ public class AdminController {
 		rd.addFlashAttribute("statusMessage", "レビューを修正しました。");
 		return "redirect:/admin/list";
 	}
+	
+	@GetMapping("/admin/delete/{id}")
+	public String delete(@PathVariable Integer id, RedirectAttributes rd) throws Exception{
+		Rservice.deleteReview(id);
+		rd.addFlashAttribute("statusMessage", "レビューを削除しました。");
+		return "redirect:/admin/list";
+	}
 }
