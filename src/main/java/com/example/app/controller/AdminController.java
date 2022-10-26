@@ -8,10 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.app.domain.Review;
 import com.example.app.domain.User;
+import com.example.app.service.ReviewService;
 import com.example.app.service.UserService;
 
 @Controller
@@ -22,7 +27,12 @@ public class AdminController {
 	UserService userservice;
 
 	@Autowired
+	ReviewService Rservice;
+
+	@Autowired
 	HttpSession session;
+
+	private static final int NUM_PER_PAGE = 5;
 
 	@GetMapping
 	public String login(Model model) {
@@ -50,6 +60,43 @@ public class AdminController {
 		}
 
 		session.setAttribute("user", userservice.getUserById(user.getLoginId()));
-		return "redirect:/admin/review";
+		return "redirect:/admin/list";
+	}
+	
+	@GetMapping("/list")
+	public String list(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) throws Exception {
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("user", user);
+		model.addAttribute("reviewList", Rservice.getReviewListByPage(page, NUM_PER_PAGE));
+		model.addAttribute("page", page);
+		model.addAttribute("totalPage", Rservice.getTotalPages(NUM_PER_PAGE));
+		return "/admin/adlist";
+	}
+	
+	@GetMapping("/fix/{id}")
+	public String fixGet(@PathVariable Integer id, Model model)throws Exception{
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("user", user);
+		model.addAttribute("title", "レビュー編集");
+		model.addAttribute("review", Rservice.getReviewById(id));
+		return "/admin/save"; 
+	}
+	
+	@PostMapping("/fix/{id}")
+	public String addfix(HttpSession session, @Valid Review review, Errors errors, RedirectAttributes rd, Model model) throws Exception {
+		User user = (User) session.getAttribute("user");
+		// 入力不備
+		if (errors.hasErrors()) {
+			
+			model.addAttribute("user", user);
+			model.addAttribute("title", "レビュー編集");
+			return "/admin/save";
+		}
+		
+		review.setName(user.getName());
+		Rservice.editReview(review);
+		model.addAttribute("user", user);
+		rd.addFlashAttribute("statusMessage", "レビューを修正しました。");
+		return "redirect:/admin/adlist";
 	}
 }
