@@ -2,7 +2,7 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{parts/common :: header}"></head>
 <body>
-	<th:block th:replace="~{parts/common :: navbar}"></th:block>
+	<th:block th:replace="~{parts/common :: adminnavbar}"></th:block>
 
 	<!-- 操作に応じたメッセージを表示:start -->
 	<div th:if="${statusMessage}" class="alert alert-success mt-4"
