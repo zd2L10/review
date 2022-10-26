@@ -89,7 +89,6 @@ public class ReviewController {
 			return "review/save";
 		}
 		
-		review.setName(user.getName());
 		Rservice.editReview(review);
 		model.addAttribute("user", user);
 		rd.addFlashAttribute("statusMessage", "レビューを修正しました。");
